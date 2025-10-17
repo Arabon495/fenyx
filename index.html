@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Trader & Web3 Founder</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #D4AF37;
+            --dark-gold: #B8941F;
+            --light-gold: #F4E6C3;
+            --black: #0A0A0A;
+            --dark-gray: #1A1A1A;
+            --light-gray: #2A2A2A;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--black) 0%, var(--dark-gray) 100%);
+            color: var(--light-gold);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated Background Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 50%;
+            animation: float 15s infinite ease-in-out;
+            opacity: 0.3;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+            }
+            25% {
+                transform: translateY(-100px) translateX(50px);
+            }
+            50% {
+                transform: translateY(-50px) translateX(-50px);
+            }
+            75% {
+                transform: translateY(-150px) translateX(100px);
+            }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--light-gold);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+            padding: 0 5%;
+        }
+
+        .hero-content {
+            text-align: center;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+            }
+            to {
+                text-shadow: 0 0 40px rgba(212, 175, 55, 0.8);
+            }
+        }
+
+        .hero h2 {
+            font-size: 2rem;
+            color: var(--light-gold);
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: rgba(244, 230, 195, 0.8);
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: linear-gradient(135deg, var(--gold), var(--dark-gold));
+            color: var(--black);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.5);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Section Styling */
+        section {
+            padding: 5rem 5%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--gold);
+        }
+
+        /* Expertise Cards */
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .expertise-card {
+            background: rgba(26, 26, 26, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .expertise-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold);
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.3);
+        }
+
+        .expertise-card h3 {
+            color: var(--gold);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .expertise-card p {
+            color: rgba(244, 230, 195, 0.8);
+        }
+
+        .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Portfolio Slider */
+        .slider-container {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow: hidden;
+            border-radius: 15px;
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            background: rgba(26, 26, 26, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 3rem;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .slide h3 {
+            color: var(--gold);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .slide p {
+            color: rgba(244, 230, 195, 0.8);
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        .slide-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        .stat-label {
+            color: rgba(244, 230, 195, 0.6);
+            font-size: 0.9rem;
+        }
+
+        .slider-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(212, 175, 55, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .slider-dot.active {
+            background: var(--gold);
+            transform: scale(1.3);
+        }
+
+        /* Skills Section */
+        .skills-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .skill-item {
+            margin-bottom: 2rem;
+        }
+
+        .skill-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-name {
+            color: var(--light-gold);
+            font-weight: 600;
+        }
+
+        .skill-percentage {
+            color: var(--gold);
+        }
+
+        .skill-bar {
+            width: 100%;
+            height: 10px;
+            background: rgba(42, 42, 42, 0.8);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--dark-gold), var(--gold));
+            border-radius: 10px;
+            transition: width 1s ease;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+
+        /* Contact Form */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--gold);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(26, 26, 26, 0.6);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 8px;
+            color: var(--light-gold);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--gold), var(--dark-gold));
+            color: var(--black);
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(10, 10, 10, 0.9);
+            padding: 2rem 5%;
+            text-align: center;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-links a {
+            color: var(--gold);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-3px);
+            text-shadow: 0 5px 15px rgba(212, 175, 55, 0.5);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero h2 {
+                font-size: 1.5rem;
+            }
+
+            nav ul {
+                gap: 1.5rem;
+                flex-wrap: wrap;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .expertise-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#expertise">Expertise</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Professional Trader & Web3 Founder</h1>
+            <h2>Building the Future of Decentralized Finance</h2>
+            <p>Transforming traditional markets through blockchain innovation and strategic trading excellence. Leading the next generation of Web3 solutions.</p>
+            <a href="#contact" class="cta-button">Let's Connect</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="fade-in">
+        <h2 class="section-title">About Me</h2>
+        <div style="max-width: 900px; margin: 0 auto; text-align: center;">
+            <p style="font-size: 1.2rem; line-height: 1.8; color: rgba(244, 230, 195, 0.8);">
+                As a seasoned professional trader and Web3 founder, I combine years of market expertise with cutting-edge blockchain technology. My journey spans traditional financial markets to decentralized ecosystems, where I've successfully launched multiple Web3 projects and managed portfolios exceeding millions in value. I specialize in algorithmic trading, DeFi protocols, and building sustainable blockchain solutions that bridge the gap between traditional finance and the decentralized future.
+            </p>
+        </div>
+    </section>
+
+    <!-- Expertise Section -->
+    <section id="expertise" class="fade-in">
+        <h2 class="section-title">Core Expertise</h2>
+        <div class="expertise-grid">
+            <div class="expertise-card">
+                <div class="icon">📈</div>
+                <h3>Advanced Trading</h3>
+                <p>Expertise in technical analysis, algorithmic trading strategies, and risk management across multiple asset classes including crypto, forex, and commodities.</p>
+            </div>
+            <div class="expertise-card">
+                <div class="icon">⛓️</div>
+                <h3>Web3 Development</h3>
+                <p>Building decentralized applications, smart contracts, and DeFi protocols on Ethereum, Polygon, and other blockchain networks.</p>
+            </div>
+            <div class="expertise-card">
+                <div class="icon">💎</div>
+                <h3>DeFi Strategy</h3>
+                <p>Deep understanding of yield farming, liquidity provision, staking mechanisms, and tokenomics for sustainable protocol design.</p>
+            </div>
+            <div class="expertise-card">
+                <div class="icon">🎯</div>
+                <h3>Market Analysis</h3>
+                <p>Data-driven insights using on-chain analytics, market sentiment analysis, and macroeconomic trends to identify opportunities.</p>
+            </div>
+            <div class="expertise-card">
+                <div class="icon">🚀</div>
+                <h3>Project Leadership</h3>
+                <p>Successfully founded and scaled multiple Web3 startups from concept to launch, managing cross-functional teams.</p>
+            </div>
+            <div class="expertise-card">
+                <div class="icon">🔐</div>
+                <h3>Security & Auditing</h3>
+                <p>Implementing best practices for smart contract security, conducting audits, and ensuring protocol safety.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Slider -->
+    <section id="portfolio" class="fade-in">
+        <h2 class="section-title">Portfolio Highlights</h2>
+        <div class="slider-container">
+            <div class="slider" id="slider">
+                <div class="slide">
+                    <h3>DeFi Protocol Launch</h3>
+                    <p>Launched a decentralized lending protocol with innovative collateral mechanisms, reaching $50M TVL within the first quarter. Implemented advanced smart contract architecture with multi-sig security and automated liquidation systems.</p>
+                    <div class="slide-stats">
+                        <div class="stat">
+                            <div class="stat-number">$50M+</div>
+                            <div class="stat-label">Total Value Locked</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">15K+</div>
+                            <div class="stat-label">Active Users</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">99.9%</div>
+                            <div class="stat-label">Uptime</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <h3>Trading Performance</h3>
+                    <p>Achieved consistent profitability through systematic algorithmic trading strategies across crypto and traditional markets. Developed proprietary indicators and automated execution systems with advanced risk management.</p>
+                    <div class="slide-stats">
+                        <div class="stat">
+                            <div class="stat-number">185%</div>
+                            <div class="stat-label">Annual ROI</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">0.42</div>
+                            <div class="stat-label">Sharpe Ratio</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">87%</div>
+                            <div class="stat-label">Win Rate</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="slide">
+                    <h3>NFT Marketplace Platform</h3>
+                    <p>Built and launched a next-generation NFT marketplace with gasless transactions, advanced royalty systems, and cross-chain capabilities. Integrated AI-powered discovery and dynamic pricing mechanisms.</p>
+                    <div class="slide-stats">
+                        <div class="stat">
+                            <div class="stat-number">$12M</div>
+                            <div class="stat-label">Trading Volume</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">8.5K</div>
+                            <div class="stat-label">Collections</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">50K+</div>
+                            <div class="stat-label">Transactions</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-nav">
+                <span class="slider-dot active" onclick="goToSlide(0)"></span>
+                <span class="slider-dot" onclick="goToSlide(1)"></span>
+                <span class="slider-dot" onclick="goToSlide(2)"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="fade-in">
+        <h2 class="section-title">Technical Skills</h2>
+        <div class="skills-container">
+            <div class="skill-item">
+                <div class="skill-header">
+                    <span class="skill-name">Solidity & Smart Contracts</span>
+                    <span class="skill-percentage">95%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" data-width="95"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-header">
+                    <span class="skill-name">Technical Analysis & Trading</span>
+                    <span class="skill-percentage">92%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" data-width="92"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-header">
+                    <span class="skill-name">JavaScript / TypeScript / Web3.js</span>
+                    <span class="skill-percentage">90%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" data-width="90"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-header">
+                    <span class="skill-name">DeFi Protocols & Tokenomics</span>
+                    <span class="skill-percentage">88%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" data-width="88"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-header">
+                    <span class="skill-name">Python for Algorithmic Trading</span>
+                    <span class="skill-percentage">85%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" data-width="85"></div>
+                </div>
+            </div>
+            <div class="skill-item">
+                <div class="skill-header">
+                    <span class="skill-name">React / Next.js</span>
+                    <span class="skill-percentage">87%</span>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-progress" data-width="87"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="fade-in">
+        <h2 class="section-title">Get In Touch</h2>
+        <form class="contact-form" onsubmit="handleSubmit(event)">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="#" title="Twitter">𝕏</a>
+            <a href="#" title="LinkedIn">in</a>
+            <a href="#" title="GitHub">⚙</a>
+            <a href="#" title="Telegram">✈</a>
+        </div>
+        <p style="color: rgba(244, 230, 195, 0.6);">&copy; 2025 Professional Trader & Web3 Founder. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Create animated particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            particlesContainer.appendChild(particle);
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Slider functionality
+        let currentSlide = 0;
+        const slider = document.getElementById('slider');
+        const dots = document.querySelectorAll('.slider-dot');
+
+        function goToSlide(index) {
+            currentSlide = index;
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentSlide);
+            });
+        }
+
+        // Auto slide
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % 3;
+            goToSlide(currentSlide);
+        }, 5000);
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Animate skill bars
+                    if (entry.target.querySelector('.skill-progress')) {
+                        const progressBars = entry.target.querySelectorAll('.skill-progress');
+                        progressBars.forEach(bar => {
+                            const width = bar.getAttribute('data-width');
+                            bar.style.width = width + '%';
+                        });
+                    }
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Form submission
+        function handleSubmit(event) {
+            event.preventDefault();
+            alert('Thank you for your message! I will get back to you soon.');
+            event.target.reset();
+        }
+
+        // Initialize skill bars
+        window.addEventListener('load', () => {
+            document.querySelectorAll('.skill-progress').forEach(bar => {
+                bar.style.width = '0%';
+            });
+        });
+    </script>
+</body>
+</html>
